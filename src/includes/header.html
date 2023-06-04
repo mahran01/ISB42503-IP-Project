@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+	<title><?php echo $page_title; ?></title>
+	<style type="text/css" media="all">@import "<?php echo $root_url."src/includes/layout.css"; ?>";</style>
+	<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+</head>
+<?php
+	$url = $root_url."src/module";
+    $filesName = 
+    [
+        '1.1.1' => "",
+        '1.1.2' => "",
+        '1.2.1' => "",
+        '2.1.1' => "restocking",
+        '2.1.2' => "",
+        '3.1.1' => "addOrder",
+        '3.1.2' => "",
+        '4.1.1' => "",
+        '4.1.2' => ""
+    ];
+	$extension = ".php";
+	$links = [];
+	foreach ($filesName as $key => $value)
+	{
+		$links[$key] = $url.mb_substr($key, 0, 1)."/".$value.$extension;
+	}
+?>
+<body>
+<div id="wrapper"><!-- Goes with the CSS layout. -->
+
+	<div id="content"><!-- Goes with the CSS layout. -->
+
+		<div id="nav"><!-- Links section -->
+			<h3>Menu</h3>
+			<ul>
+			<li class="navtop"><a href="<?php echo $root_url."public" ?>">Home</a></li>
+			<?php 
+				foreach($links as $module => $link)
+				{
+					echo "<li class='navtop'><a href='$link'>Module $module</a></li>";
+				}; 
+			?>
+			</ul>
+		</div>
+		<!-- Script 3.2 - header.html -->
+		<!-- Start of page-specific content. -->
+        <main>
