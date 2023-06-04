@@ -1,3 +1,5 @@
+DROP DATABASE IF EXISTS ip_project;
+
 CREATE DATABASE IF NOT EXISTS ip_project;
 
 USE ip_project;
@@ -58,11 +60,11 @@ VALUES
 (3, 'Declined');
 
 CREATE TABLE IF NOT EXISTS approval (
-    ApprovalId INT NOT NULL PRIMARY KEY,
-    ApprovalStatusId INT NOT NULL,
+    ApprovalId INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    ApprovalStatusId INT NOT NULL DEFAULT 1,
     ApprovedBy INT,
-    DateCreated DATETIME NOT NULL,
-    DateUpdated DATETIME NOT NULL,
+    DateCreated DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    DateUpdated DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (ApprovalStatusId) REFERENCES approval_status(ApprovalStatusId),
     FOREIGN KEY (ApprovedBy) REFERENCES role_supplier(SupplierId)
 );
@@ -72,7 +74,7 @@ CREATE TABLE IF NOT EXISTS sales_order (
     CustomerName VARCHAR(100) NOT NULL,
     CustomerAddress VARCHAR(250) NOT NULL,
     ContactNumber VARCHAR(15) NOT NULL,
-    DateCreated DATETIME NOT NULL,
+    DateCreated DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CreatedBy INT NOT NULL,
     ApprovalId INT NOT NULL,
     FOREIGN KEY (CreatedBy) REFERENCES role_agent(AgentId),
@@ -80,13 +82,13 @@ CREATE TABLE IF NOT EXISTS sales_order (
 );
 
 CREATE TABLE IF NOT EXISTS item (
-    ItemId INT NOT NULL PRIMARY KEY,
+    ItemId INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     ItemName VARCHAR(100) NOT NULL,
     ItemDescription VARCHAR(255) NOT NULL,
     ItemPrice DECIMAL(10,2) NOT NULL,
     ItemQuantity INT NOT NULL,
-    DateCreated DATETIME NOT NULL,
-    DateUpdated DATETIME NOT NULL,
+    DateCreated DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    DateUpdated DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     SupplierId INT NOT NULL,
     FOREIGN KEY (SupplierId) REFERENCES role_supplier(SupplierId)
 );
