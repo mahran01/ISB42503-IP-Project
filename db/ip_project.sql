@@ -17,7 +17,7 @@ VALUES
 
 CREATE TABLE IF NOT EXISTS user_account (
     UserId INT NOT NULL PRIMARY KEY,
-    userName VARCHAR(100) NOT NULL,
+    UserName VARCHAR(100) NOT NULL,
     ICNumber VARCHAR(12) NOT NULL,
     RoleId INT NOT NULL,
     FOREIGN KEY (RoleId) REFERENCES user_role(RoleId)
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS role_agent (
 
 CREATE TABLE IF NOT EXISTS approval_status (
     ApprovalStatusId INT NOT NULL PRIMARY KEY,
-    ApprovalName VARCHAR(10) NOT NULL
+    ApprovalStatusName VARCHAR(10) NOT NULL
 );
 
 INSERT INTO approval_status
