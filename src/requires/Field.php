@@ -5,14 +5,16 @@ enum Type
     case Currency;
     case String;
     case Select;
+    case Array;
 }
 class Field
 {
-    public $name, $desc, $type, $min, $max, $value, $error, $fromSession;
+    public $name, $desc, $type, $min, $max, $value, $error, $fromSession, $isArray;
 
     public function __construct($name, $desc, $type, $min, $max, $fromSession = false)
     {
-        $this->name = $name;
+        $this->isArray = substr($name, strlen($name) - 2) == "[]";
+        $this->name = $this->isArray ? substr($name, 0, strlen($name) - 2) : $name;
         $this->desc = $desc;
         $this->type = $type;
         $this->min = $min;
@@ -22,6 +24,7 @@ class Field
 
     public function validateError(&$errors)
     {
+
         $name = $this->name;
         $desc = $this->desc;
         $type = $this->type;
@@ -29,6 +32,7 @@ class Field
         $max = $this->max;
         $error = &$this->error;
         $fromSession = $this->fromSession;
+        $isArray = $this->isArray;
 
         $desc = '<b>'.ucfirst($desc).'</b>';
         if (!postExists($name) && !$fromSession)
@@ -53,6 +57,12 @@ class Field
             $this->value = &$_POST[$name];
         }
         
+        //@TODO for array /////////////////////////////////////////////////////////////////
+        if ($isArray)
+        {
+            return;
+        }
+
         $value= &$this->value;
         
         if ($type === Type::Select)
