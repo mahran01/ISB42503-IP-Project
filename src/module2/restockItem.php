@@ -11,6 +11,5 @@ $supplierId = "2001";
 <?php include_once("{$src}includes/header.html");?>
 <h1>Restocking</h1>
 <h2>Supplier Id: <?php echo $supplierId ?></h2>
-<?php //include_once("createNewItem.php");?>
-<?php include_once("updateItem.php");?>
+<?php include_once("restockingItem.php");?>
 <?php include_once("{$src}includes/footer.html");?>

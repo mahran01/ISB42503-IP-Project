@@ -46,7 +46,7 @@ if (postExists("modifyItemSubmit"))
     }
     else
     {
-        if ($mysqli->execute_query("UPDATE item SET ItemQuantity = ? WHERE ItemId = ? && SupplierId = ?;", [$itemQuantity, $itemId, $supplierId]))
+        if ($mysqli->execute_query("UPDATE item SET ItemQuantity = ?, DateUpdated = NOW() WHERE ItemId = ? && SupplierId = ?;", [$itemQuantity, $itemId, $supplierId]))
         {
             echo "<p>Succesfully modify data</p>";
             echo "<p>New Data:-</p>";
@@ -103,7 +103,7 @@ if (postExists("addItemSubmit"))
     }
     else
     {
-        if ($mysqli->execute_query("UPDATE item SET ItemQuantity = (ItemQuantity + ?) WHERE ItemId = ? && SupplierId = ?;", [$itemQuantity, $itemId, $supplierId]))
+        if ($mysqli->execute_query("UPDATE item SET ItemQuantity = (ItemQuantity + ?), DateUpdated = NOW() WHERE ItemId = ? && SupplierId = ?;", [$itemQuantity, $itemId, $supplierId]))
         {
             echo "<p>Succesfully add quantity</p>";
             echo "<p>New Data:-</p>";
