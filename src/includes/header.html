@@ -14,19 +14,19 @@
         '1.1.1' => "",
         '1.1.2' => "",
         '1.2.1' => "",
-        '2.1.1' => "restocking",
+        'Restock Item' => "2/restockItem",
         '2.1.2' => "",
-        '3.1.1' => "addOrder",
-        '3.1.2' => "",
-        '4 Record' => "recordOrder",
-        '4 Agent' => "agentPerformance",
-		'4 Sales' => "salesPerformance"
+        'Create Order' => "3/createOrder",
+        'Approve Order' => "3/approveOrder",
+        'Record Order' => "4/recordOrder",
+        'Agent Performance' => "4/agentPerformance",
+		'Sales Performance' => "4/salesPerformance"
     ];
 	$extension = ".php";
 	$links = [];
 	foreach ($filesName as $key => $value)
 	{
-		$links[$key] = $url.mb_substr($key, 0, 1)."/".$value.$extension;
+		$links[$key] = $url.$value.$extension;
 	}
 ?>
 <body>
@@ -41,7 +41,7 @@
 			<?php 
 				foreach($links as $module => $link)
 				{
-					echo "<li class='navtop'><a href='$link'>Module $module</a></li>";
+					echo "<li class='navtop'><a href='$link'>$module</a></li>";
 				}; 
 			?>
 			</ul>
