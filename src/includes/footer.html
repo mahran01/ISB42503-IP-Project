@@ -8,6 +8,66 @@
 			</div>
 		
 		</div><!-- End of "wrapper" DIV. -->
-		<script src="<?php echo $root_url."src/js/app.js"?>"></script>
+		<script>
+			const changeURL = (newUrl) => {
+			// Change the URL without reloading the page
+				history.pushState(null, '', newURL);
+			}
+			const redirectPost = (url, retainPost = false) => {
+				const data = {url: url};
+				if (retainPost)
+				{	
+					const post = <?php echo json_encode($_POST)?>;
+					$.each(post, function(key, value) {
+						data[key] = value;
+					});
+				}
+				$.ajax({
+					method: 'POST',
+					url: '../src/requires/router/handleRequest.php',
+					data : data,
+					success: function(response) {
+						// // Update the content dynamically
+						$('#main').html(response);
+					},
+					error: function() {
+						// Handle errors
+						console.log('Error occurred');
+					}
+				});
+			}
+			$(document).ready(function() {
+				// Handle router links click event
+				$('.router-link').click(function(e) {
+					e.preventDefault(); // Prevent default link behavior
+		
+					// Get the URL from the clicked link
+					var url = $(this).attr('href');
+					redirectPost(url);
+					
+				});
+				$('.form-control').submit(function(e) {
+					e.preventDefault(); // Prevent default link behavior
+					window.history.back();
+					// Get the URL from the clicked link
+					var url = $(this).attr('action');
+					
+					$.ajax({
+						method: 'POST',
+						url: '../src/requires/router/handleRequest.php',
+						data : {url: url},
+						success: function(response) {
+							// // Update the content dynamically
+							$('#main').html(response);
+						},
+						error: function() {
+							// Handle errors
+							console.log('Error occurred');
+						}
+					});
+				});
+			});
+		</script>
+		<script src="../src/js/app.js"></script>
 	</body>
 </html>
