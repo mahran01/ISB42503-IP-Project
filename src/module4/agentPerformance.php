@@ -1,14 +1,11 @@
 <?php
-	$root_url = "../../";
-	$src = "../";
 	$page_title = "Agent Performance";
-
-	include ('../includes/header.html');
-	require_once("../mysql/mysqli.php");
+	[$mysqli, $dbc] = Route::MYSQL_BOTH();
 ?>
 
+
 <h2>Agent Performance</h2>
-<form action="agentPerformance.php" method="post">
+<form action="" method="post">
 	<p>Agent: 
 	<?php
 		$resultSet= $mysqli->query("SELECT DISTINCT CreatedBy FROM sales_order INNER JOIN sales_order_line USING (SalesOrderId) INNER JOIN approval USING (ApprovalId) WHERE approval.ApprovalStatusId = 2");
@@ -29,8 +26,6 @@
 <?php
 	// Check if the form has been submitted.
 	if (isset($_POST['submitted'])) {
-			
-		global $dbc;
 		
 		/*function escape_data ($data) {
 				
@@ -68,5 +63,4 @@
 			</table>';
 	}
 
-	include ('../includes/footer.html');
 ?>

@@ -1,11 +1,9 @@
 <?php
-require_once("{{$src}requires/generalFunction.php");
 
 if (postExists("createNewItemSubmit"))
 {
     //VALIDATION starts here##################################################################################################
     //General error
-    require_once("{$src}requires/Field.php");
     $fields = 
     [
         //Min & max are inclusive
@@ -25,7 +23,6 @@ if (postExists("createNewItemSubmit"))
     //Data error
     if (empty($errors))
     {
-        require_once("{$src}mysql/mysqli.php");
         if ($row = $mysqli->execute_query("SELECT itemId FROM item WHERE itemId= ?;", [$itemId]))
         {
             if ($row->num_rows != 0)
@@ -58,7 +55,7 @@ if (postExists("createNewItemSubmit"))
             <p>The item is now added. </p><p><br /></p>';	
         
             // Include the footer and quit the script (to not show the form).
-            // include ('./a_includes/footer.html'); 
+            // include ('./a_includes/footer.php'); 
             exit();
         }
         else
@@ -66,7 +63,7 @@ if (postExists("createNewItemSubmit"))
             echo '<h1 id="mainhead">System Error</h1>
             <p class="error">The item could not be added due to a system error. We apologize for any inconvenience.</p>'; // Public message.
             echo '<p>' . mysqli_error($dbc)  . '<br /><br />Query: ' . $query . '</p>'; // Debugging message.
-            // include ('./includes/footer.html'); 
+            // include ('./includes/footer.php'); 
             exit();
         }
     }

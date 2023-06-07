@@ -1,8 +1,4 @@
 <?php
-require_once("{$src}requires/generalFunction.php");
-require_once("{$src}requires/Field.php");
-require_once("{$src}mysql/mysqli.php");
-
 if (postExists("modifyItemSubmit"))
 {
     //VALIDATION starts here##################################################################################################

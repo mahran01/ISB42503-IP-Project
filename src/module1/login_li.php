@@ -1,11 +1,9 @@
 <?php # Script 9.1 - login.php
 // Send NOTHING to the Web browser prior to the setcookie() lines!
 
+$dbc = Route::MYSQL_PROCEDURAL();
 // Check if the form has been submitted.
 if (isset($_POST['submit'])) {
-
-	require_once ('mysqli.php'); // Connect to the db.
-	global $dbc;
 
 /*	function escape_data ($data) {
 			
@@ -42,45 +40,47 @@ if (isset($_POST['submit'])) {
 		that email/LoginPassword combination. */
 		$query = "SELECT * FROM user_login_data JOIN user_account USING (UserId) WHERE LoginName='$LoginName' AND LoginPassword=('$p') AND RoleId=$role";		
 		$result = @mysqli_query ($dbc,$query); // Run the query.
-		$row = mysqli_fetch_array ($result, MYSQLI_NUM); // Return a record, if applicable.
+		$row = mysqli_fetch_assoc ($result); // Return a record, if applicable.
 		
 
 		if ($row) { // A record was pulled from the database.
-				
-			// Set the cookies & redirect.
-			setcookie ('UserId', $row[0]);
-			setcookie ('LoginName', $row[1]);
-			setcookie ('RoleId', $row[5]);
-			setcookie ('username', $row[3]);//joe
-
-			echo '<h1> Logged in </h1>';
-		echo "<p> hello ".$_COOKIE ["username"]." </p>";
-			
-			//setcookie ('user_id', $row[0], time()+3600, '/', '', 0);
-			//setcookie ('first_name', $row[1], time()+3600, '/', '', 0);
-			
-			
-			// Redirect the user to the loggedin.php page.
-			// Start defining the URL.
-			$url = 'http://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']);
-			// Check for a trailing slash.
-			if ((substr($url, -1) == '/') OR (substr($url, -1) == '\\') ) {
-				$url = substr ($url, 0, -1); // Chop off the slash.
+			$_SESSION = [];
+			if ($row['RoleId'] == 2)
+			{
+				setcookie('supplierId', $row['UserId'], time() + 3600, '/');
+				setcookie('agentId', '', time() - 3600, '/');
+                $_SESSION['url'] = '/supplierHome';
 			}
-			if ($role == 3)
-			$url .= '/agent.php';
-			
-			elseif ($role == 2)
-			$url .= '/supplier.php';
-			
-			header("Location: $url");
-			
-			//echo'<br><a href="http://localhost/ip/cookies/loggedin.php">Logged in</a>';
-			exit(); // Quit the script.
+			elseif ($row['RoleId'] == 3)
+			{
+				setcookie('agentId', $row['UserId'], time() + 3600, '/');
+				setcookie('supplierId', '', time() - 3600, '/');
+                $_SESSION['url'] = '/agentHome';
+			}
+			setcookie('userName', $row['UserName'], time() + 3600, '/');
+
+			echo '<h1>Logged in</h1>';
+			echo "<p>Hello ".$row['UserName']." </p>";
+
+			// // Redirect the user to the loggedin.php page.
+			// // Start defining the URL.
+			// if ($role == 2)
+			// ROUTER->handleRequest("/supplierHome");
+			// elseif ($role == 3)
+            
+            //@TODO check for login
+			ROUTER->handleRequest("/refresh");
+            
+            echo "<script>
+                    setTimeout(function(){
+                        window.location.reload();
+                    }, 1000);
+                </script>";
+            exit();
 				
 		} else { // No record matched the query.
 			$errors[] = 'The Login Name and Login Password entered do not match those on file.'; // Public message.
-			$errors[] = mysqli_error($dbc)  . '<br /><br />Query: ' . $query; // Debugging message.
+			// $errors[] = mysqli_error($dbc)  . '<br /><br />Query: ' . $query; // Debugging message.
 		}
 		
 	} // End of if (empty($errors)) IF.
@@ -95,7 +95,6 @@ if (isset($_POST['submit'])) {
 
 // Begin the page now.
 $page_title = 'Login';
-include ('./u_includes/header.html');
 
 if (!empty($errors)) { // Print any error messages.
 	echo '<h1 id="mainhead">Error!</h1>
@@ -109,7 +108,7 @@ if (!empty($errors)) { // Print any error messages.
 // Create the form.
 ?>
 <h2>Login</h2>
-<form action="login_li.php" method="post">
+<form action="" method="post">
 	<p>LoginName: <input type="text" name="LoginName" size="20" maxlength="40" /> </p>
 	<p>LoginPassword: <input type="LoginPassword" name="LoginPassword" size="20" maxlength="20" /></p>
 	<p><input type="submit" name="submit" value="Login" /></p>
@@ -123,6 +122,3 @@ if (!empty($errors)) { // Print any error messages.
 			  
 		  </select>
 </form>
-<?php
-include ('./u_includes/footer.html');
-?>

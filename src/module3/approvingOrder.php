@@ -1,8 +1,5 @@
 <?php
-require_once("{$src}requires/generalFunction.php");
-require_once("{$src}requires/Field.php");
-require_once("{$src}mysql/mysqli.php");
-
+if (isset($_POST['url'])) $_SESSION['url'] = $_POST['url'];
 if (postExists('updateApprovalSubmit'))
 {
     //VALIDATION starts here##################################################################################################
@@ -16,7 +13,6 @@ if (postExists('updateApprovalSubmit'))
     $declined = array_filter($approvalSelect->value, fn($v) => $v == 3);
     $approved = array_filter($approvalSelect->value, fn($v) => $v == 2);
     $orderApproved = array_intersect_key($order, $approved);
-    // print_r($orderApproved);
 
     $itemTotals = array_reduce($orderApproved, function ($c, $items) {
         foreach ($items as $id => $q) {
@@ -71,7 +67,6 @@ if (postExists('updateApprovalSubmit'))
             <p>The Order is being updated.</p><p><br /></p>';	
         
             // Include the footer and quit the script (to not show the form).
-            include ("{$src}includes/footer.html"); 
             exit();
         }
         catch (Exception $e)
@@ -82,8 +77,7 @@ if (postExists('updateApprovalSubmit'))
             //@TODO handle the error, e.g., delete the inserted row
             echo '<h1 id="mainhead">System Error</h1>
             <p class="error">The item could not be added due to a system error. We apologize for any inconvenience.</p>'; // Public message.
-            echo '<p>' . mysqli_error($dbc)  . '<br /><br />Exception: ' . $e . '</p>'; // Debugging message.
-            // include ('./includes/footer.html'); 
+            // include ('./includes/footer.php'); 
             exit();
         }
     }
@@ -172,7 +166,6 @@ if (postExists('updateApprovalSubmit'))
         else :
         //@TODO handle the error, e.g., delete the inserted row
         echo '<h3 id="mainhead">No pending approval...</h3>';
-        include ("{$src}/includes/footer.html"); 
         exit(); 
         endif ?>
     </table>

@@ -1,9 +1,6 @@
 <?php
-	$root_url = "../../";
-	$src = "../";
 	$page_title = 'Record Order list';
-	include ("../includes/header.html");
-	require_once("../mysql/mysqli.php");
+	$dbc = Route::MYSQL_PROCEDURAL();
 ?>
 <h2>Record Order List</h2>
 <?php
@@ -57,7 +54,4 @@
 	mysqli_free_result($r); // Free up the resources.
 	mysqli_close($dbc); // Close the database connection.
 
-?>
-<?php
-include ('../includes/footer.html');
 ?>

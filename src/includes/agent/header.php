@@ -14,19 +14,11 @@
 		<div id="nav">
 			<h3>Menu</h3>
 			<ul>
-                <li class="navtop"><a href="/supplierHome" class="router-link">Home</a></li>
                 <li class="navtop"><a href="/agentHome" class="router-link">Home</a></li>
-                <li><a href="/login" class="router-link">Login</a></li>
-                <li><a href="/logout" class="router-link">Logout</a></li>
-                <li><a href="/register" class="router-link">Register</a></li>
-                <li><a href="/restockItem" class="router-link">Restock Item</a></li>
-                <li><a href="/approveOrder" class="router-link">Approve Order</a></li>
                 <li><a href="/createOrder" class="router-link">Create Order</a></li>
-                <li><a href="/agentPerformance" class="router-link">Agent Performance</a></li>
-                <li><a href="/salesPerformance" class="router-link">Sales Performance</a></li>
-                <li><a href="/recordOrder" class="router-link">Record Order</a></li>
+                <li><a href="/logout" class="router-link">Logout</a></li>
 			</ul>
 		</div>
-		<!-- Script 3.2 - header.html -->
+		<!-- Script 3.2 - header.php -->
 		<!-- Start of page-specific content. -->
         <main id="main">

@@ -3,9 +3,6 @@
 class Router
 {
     private $routes = [];
-    
-    static $_ROOT = '../';
-    static $_SRC = '../src/';
 
     public function addRoute($url, $handler) {
         if (!array_key_exists($url, $this->routes))
@@ -26,21 +23,6 @@ class Router
         } else {
             echo "No route found for URL: $url";
         }
-    }
-
-    static function goto($url)
-    {
-        include_once Router::$_SRC.$url;
-    }
-
-    static function header()
-    {
-        Router::goto("includes/header.html");
-    }
-
-    static function footer()
-    {
-        Router::goto("includes/footer.html");
     }
 }
 ?>

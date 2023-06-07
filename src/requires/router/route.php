@@ -9,13 +9,36 @@ class Route {
     {
         return ROUTER->addRoute($url, $handler.'.php');
     }
-    static function header()
+    //Path for header and footer is relative to public/index.php
+    public static $__SRC = "../src/";
+    public static $__INC = "../src/includes/";
+    public static $__REQ = "../src/requires/";
+
+    static function header($page_title = "Inventory Manager")
     {
-        Router::header();
+        if (isset($_COOKIE['agentId']))
+        {
+            include self::$__INC."agent/header.php";
+            return;
+        }
+        if (isset(($_COOKIE['supplierId'])))
+        {
+            include self::$__INC."supplier/header.php";
+            return;
+        }
+        include self::$__INC."header.php";
     }
     static function footer()
     {
-        Router::footer();
+        // if (isset($_COOKIE['agentId']))
+        // {
+        //     include_once self::$__INC."agent/header.php";
+        // }
+        // if (isset(($_COOKIE['supplierId'])))
+        // {
+        //     include_once self::$__INC."supplier/header.php";
+        // }
+        include_once self::$__INC."footer.php";
     }
     static function MYSQL()
     {
@@ -33,7 +56,7 @@ class Route {
         return [$mysqli, $dbc];
     }
 }
-//Some path Path specified is relative to generalFuntion.php
+//Some path - Path specified is relative to this
 $root = "../../../";
 $public = $root."public/";
 $src = $root."src/";
@@ -43,17 +66,32 @@ $module1 = $src."module1/";
 $module2 = $src."module2/";
 $module3 = $src."module3/";
 $module4 = $src."module4/";
+$includes = $src."includes/";
+$aIncludes = $includes."agent/";
+$sIncludes = $includes."supplier/";
 
 // require_once $mysql.'mysqli.php';
-require_once $requires.'field.php';
-require_once $requires.'generalFunction.php';
+if(!(isset($isIndex) && $isIndex))
+{
+    require_once $requires.'field.php';
+    require_once $requires.'generalFunction.php';
+}
 
 //Specify all route here
 // Route::add('/home', $public.'home.php');
 // Route::add('/about', $public.'about.php');
 // Route::add('/contact', $public.'contact.php');
 
+//Public (For Reloading)
+//Refresh page
+Route::add('/refresh', $includes.'refresh');
+
+//Header
+Route::add('/agentHeader', $aIncludes.'header');
+Route::add('/supplierHeader', $sIncludes.'header');
+
 //Home
+Route::add('/home', $src.'home');
 Route::add('/supplierHome', $module1.'supplier');
 Route::add('/agentHome', $module1.'agent');
 

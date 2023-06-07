@@ -3,18 +3,24 @@
 
 // Set the page title and include the HTML header.
 $page_title = 'Logged Out!';
-include ('./u_includes/header.html');
 
 // Print a customized message.
 echo "<h1>Logged Out!</h1>
-<p>You are now logged out, {$_COOKIE['first_name']}!</p>
+<p>You are now logged out".(isset($_COOKIE['userName']) ? ", ".$_COOKIE['userName'] : "")."!</p>
 <p><br /><br /></p>";
 
-// Delete the cookies.
-//setcookie ('first_name', '', time()-300, '/', '', 0);
-//setcookie ('user_id', '', time()-300, '/', '', 0);
-$_COOKIE = [];
-print_r ($_COOKIE);
+if(isset($_COOKIE['userName']))
+{
+    echo "<script>
+    setTimeout(function(){
+        window.location.reload();
+    });
+    </script>";
+}
 
-include ('./u_includes/footer.html');
+// Delete the cookies.
+setcookie ('supplierId', '', time()-3600, '/');
+setcookie ('agentId', '', time()-3600, '/');
+setcookie ('userName', '', time()-3600, '/');
+// session_destroy();
 ?>

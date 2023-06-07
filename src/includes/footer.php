@@ -44,27 +44,6 @@
 					// Get the URL from the clicked link
 					var url = $(this).attr('href');
 					redirectPost(url);
-					
-				});
-				$('.form-control').submit(function(e) {
-					e.preventDefault(); // Prevent default link behavior
-					window.history.back();
-					// Get the URL from the clicked link
-					var url = $(this).attr('action');
-					
-					$.ajax({
-						method: 'POST',
-						url: '../src/requires/router/handleRequest.php',
-						data : {url: url},
-						success: function(response) {
-							// // Update the content dynamically
-							$('#main').html(response);
-						},
-						error: function() {
-							// Handle errors
-							console.log('Error occurred');
-						}
-					});
 				});
 			});
 		</script>

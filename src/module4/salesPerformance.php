@@ -1,13 +1,10 @@
 <?php
-	$root_url = "../../";
-	$src = "../";
 	$page_title = "Sales Performance";
-	include ('../includes/header.html');
-	require_once("../mysql/mysqli.php");
+	[$mysqli, $dbc] = Route::MYSQL_BOTH();
 ?>
 
 <h2>Sales Performance by Month</h2>
-<form action="salesPerformance.php" method="post">
+<form action="" method="post">
 	<p>Monthly Sales: 
     <?php
         $resultSet = $mysqli->query("SELECT DISTINCT MONTH(sales_order.DateCreated) AS month FROM sales_order INNER JOIN sales_order_line USING (SalesOrderId) INNER JOIN approval USING (ApprovalId) WHERE approval.ApprovalStatusId = 2");
@@ -28,8 +25,6 @@
 <?php
 	// Check if the form has been submitted.
 	if (isset($_POST['submitted'])) {
-			
-		global $dbc;
 		
 		$errors = array(); // Initialize error array.
 
@@ -53,5 +48,4 @@
 		}
 	}
 
-	include ('../includes/footer.html');
 ?>

@@ -1,9 +1,6 @@
 <?php
-require_once("{$src}requires/generalFunction.php");
-require_once("{$src}mysql/mysqli.php");
-require_once("{$src}requires/Field.php");
+if (isset($_SESSION['url']) && $_SESSION['url'] != '/createOrder') unset($_SESSION['customerDetail']);
 
-session_start();
 if (postExists("customerDetailSubmit"))
 {
     //VALIDATION starts here##################################################################################################
@@ -29,10 +26,10 @@ if (postExists("customerDetailSubmit"))
     }
     else
     {
-        foreach($fields as $field)
-        {
-            $_SESSION[$field->name] = $field->value;
-        }
+        // foreach($fields as $field)
+        // {
+        //     $_SESSION[$field->name] = $field->value;
+        // }
         $result = array_reduce($fields, fn($carry, $field) => [$field->name => $field->value] + $carry, []);
         $_SESSION["customerDetail"] = $result;
     }
@@ -47,8 +44,7 @@ if (postExists("cancelAddItemSubmit"))
         exit();
     }
     //VALIDATION ends here ###################################################################################################
-    session_destroy();
-    session_start();
+    unset($_SESSION['customerDetail']);
 }
 if (postExists("addItemSubmit"))
 {
@@ -57,17 +53,11 @@ if (postExists("addItemSubmit"))
     if (!sessionExists("customerDetail"))
     {
         echo "<h1>Unknown error</h1>";
+        unset($_SESSION['customerDetail']);
         exit();
     }
     // General error
     $fields = [];
-    $fields = 
-    [
-        //Min & max are inclusive
-        new Field("customerName", "customer Name", Type::String, 1, 50, true),
-        new Field("customerAddress", "address", Type::String, 1, 255, true),
-        new Field("contactNumber", "contact no.", Type::String, 1, 15, true),
-    ];
     $itemNumber = (count($_POST) - 1) / 2;
     for ($i = 1; $i <= $itemNumber; $i++)
     {
@@ -76,11 +66,16 @@ if (postExists("addItemSubmit"))
     }
     $errors = [];
     foreach($fields as $field) $field->validateError($errors);
+    [
+        'customerName' => $customerName,
+        'customerAddress'=> $customerAddress,
+        'contactNumber' => $contactNumber
+    ] = getSessionIfExist('customerDetail');
 
     $values = array_map(fn($field) => $field->value, $fields);
-    [$customerName, $customerAddress, $contactNumber] = $values;
+
     $items = [];
-    for ($i = 3; $i < count($values);)
+    for ($i = 0; $i < count($values);)
     {
         $items[$values[$i++]] = $values[$i++];
     }
@@ -117,28 +112,27 @@ if (postExists("addItemSubmit"))
             $mysqli->commit();
 
             //@TODO print success
+            unset($_SESSION['customerDetail']);
 
-            session_destroy();
             // Send an email, if desired.
             
             // Print a message.
             echo '<h1 id="mainhead">Thank you!</h1>
             <p>The item is now added. </p><p><br /></p>';	
-        
-            // Include the footer and quit the script (to not show the form).
-            // include ('./a_includes/footer.html'); 
+
             exit();
         }
         catch(Exception $e)
         {
             // Rollback the transaction
             $mysqli->rollback();
+            unset($_SESSION['customerDetail']);
 
             //@TODO handle the error, e.g., delete the inserted row
             echo '<h1 id="mainhead">System Error</h1>
-            <p class="error">The item could not be added due to a system error. We apologize for any inconvenience.</p>'; // Public message.
-            echo '<p>' . mysqli_error($dbc)  . '<br /><br />Exception: ' . $e . '</p>'; // Debugging message.
-            // include ('./includes/footer.html'); 
+            <p class="error">The item could not be added due to database error. We apologize for any inconvenience.</p>
+            <font color="red">Error : '.$e.'</font>'; // Public message.
+
             exit();
         }
     }
