@@ -1,12 +1,9 @@
 <?php
 $page_title = 'Product Details';
-require_once('mysqli.php'); // Connect to the db.
-global $dbc;
+$dbc = Route::MYSQL_PROCEDURAL();
 ?>
 
 <style>
-
-
 .custom-table {
     width: 100%;
     max-width: 1500px; 
@@ -33,6 +30,7 @@ global $dbc;
     background-color: #eaeaea;
 }
 </style>
+<h1>View Item Details</h1>
 <?php
 if (isset($_POST['logout'])) {
     // Perform logout actions here
@@ -69,7 +67,7 @@ if ($num > 0) {
         $itemQuantity = $row['ItemQuantity'];
         $DateCreated = $row['DateCreated'];
         $DateUpdated = $row['DateUpdated'];
-        $Supplierid = $row['SupplierID'];
+        $Supplierid = $row['SupplierId'];
 
         echo '<tr>
             <td>' . $itemid . '</td>
@@ -89,6 +87,3 @@ if ($num > 0) {
 mysqli_free_result($r); // Free up the resources.
 mysqli_close($dbc); // Close the database connection.
 ?>
-<form method="post" action="logout_li.php">
-    <input type="submit" name="logout" value="Logout">
-</form>

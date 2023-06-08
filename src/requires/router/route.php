@@ -99,6 +99,8 @@ Route::add('/agentHome', $module1.'agent');
 Route::add('/login', $module1.'login_li');
 Route::add('/logout', $module1.'logout_li');
 Route::add('/register', $module1.'register_li');
+Route::add('/viewItemDetails', $module1.'view_item_details');
+Route::add('/viewOrderDetails', $module1.'view_order_details');
 
 //Module 2
 Route::add('/restockItem', $module2.'restockItem');
@@ -111,4 +113,6 @@ Route::add('/createOrder', $module3.'createOrder');
 Route::add('/agentPerformance', $module4.'agentPerformance');
 Route::add('/salesPerformance', $module4.'salesPerformance');
 Route::add('/recordOrder', $module4.'recordOrder');
+
+require "authenticator.php";
 ?>
