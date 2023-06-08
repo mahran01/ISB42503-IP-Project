@@ -4,7 +4,6 @@
 			</div><!-- End of "content" DIV. -->
 			
 			<div id="footer">
-				<p>ISB 42503 :: INTERNET PROGRAMMING - PROJECT</p>
 			</div>
 		
 		</div><!-- End of "wrapper" DIV. -->

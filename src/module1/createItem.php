@@ -1,5 +1,6 @@
 <?php
-
+$mysqli = Route::MYSQL();
+$supplierId = Authenticator::Supplier();
 if (postExists("createNewItemSubmit"))
 {
     //VALIDATION starts here##################################################################################################
