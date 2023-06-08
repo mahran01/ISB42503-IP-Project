@@ -18,6 +18,7 @@
 				}
 			?>
 		</select>
+        </p>
 	<p><input type="submit" name="submit" value="Check" /></p>
 	<input type="hidden" name="submitted" value="TRUE" />
 </form>
@@ -41,59 +42,46 @@ if (isset($_POST['submitted'])) {
     } else {
         $salesOrderId = ($_POST['salesOrderId']);
     }
-
+     
     $q = "SELECT * FROM sales_order INNER JOIN sales_order_line USING (SalesOrderId) INNER JOIN approval USING (ApprovalId) INNER JOIN item USING (ItemId) WHERE approval.ApprovalStatusId = 2 AND sales_order.SalesOrderId = $salesOrderId";
     $r = mysqli_query($dbc, $q) or die ('error');
 	$num = mysqli_num_rows($r);
-        
-    echo 'Sales Order Id:' .$num['SalesOrderId'].'';
-        
+
+    if ($num > 0) {
+        $row = mysqli_fetch_assoc($r);
+
+        echo'<h3>RECEIPT ORDER</h3>';
+        echo '<b>Sales Order Id:</b> ' . $row['SalesOrderId'];
+        echo '<br/><b>Created By:</b> ' . $row['CreatedBy'];
+        echo '<br/>--------------------------------';
+        echo '<br/><b>Customer Name:</b> ' . $row['CustomerName'];
+        echo '<br/><b>Customer Number:</b> ' . $row['ContactNumber'];
+        echo '<br/><b>Date:</b> ' . $row['DateCreated'];
+        echo '<br/>--------------------------------';
+        echo '<table border="0" cellspacing="2" cellpadding="5" class="custom-table">
+                <tr>
+					<td align="left"><b>Item ID</b></td>
+					<td align="left"><b>Item Name</b></td>
+					<td align="left"><b>Quantity</b></td>
+                    <td align="left"><b>Price</b></td>
+                </tr>';
+        do {
+            echo '<tr>
+                <td align="left">' . $row['ItemId'] . '</td>
+                <td align="left">' . $row['ItemName'] . '</td>
+                <td align="left">' . $row['Quantity'] . '</td>
+                <td align="left">RM' . ($row['Quantity']*$row['ItemPrice']). '</td>
+                </tr>';
+
+        } while ($row = mysqli_fetch_assoc($r));
+        echo '</table>';
+	} 
+
+    $query = mysqli_query($dbc,"SELECT SUM(Quantity * ItemPrice) AS total_price FROM sales_order INNER JOIN sales_order_line USING (SalesOrderId) INNER JOIN approval USING (ApprovalId) INNER JOIN item USING (ItemId) WHERE approval.ApprovalStatusId = 2 AND sales_order.SalesOrderId = $salesOrderId");
+	$total_price = mysqli_fetch_array($query);
+    echo '<br/>--------------------------------';
+	echo '<br/><b>TOTAL PRICE:</b> RM'. $total_price['total_price'];
+    echo '<br/>--------------------------------';
 }
-
-	// $q = "SELECT * FROM sales_order INNER JOIN sales_order_line USING (SalesOrderId) INNER JOIN approval USING (ApprovalId) INNER JOIN item USING (ItemId) WHERE approval.ApprovalStatusId = 2";
-	// $r = mysqli_query($dbc, $q) or die ('error');
-	// $num = mysqli_num_rows($r);
-    //     if(mysqli_num_rows($r) > 0){
-	// echo '<table border="3" align="center" cellspacing="2" cellpadding="5">
-    //             <tr>
-	// 				<td align="left"><b>Sales Order ID</b></td>
-	// 				<td align="left"><b>Customer Name</b></td>
-	// 				<td align="left"><b>Contact Number</b></td>
-	// 				<td align="left"><b>Date Create</b></td>
-	// 				<td align="left"><b>Created By</b></td>
-	// 				<td align="left"><b>Item ID</b></td>
-	// 				<td align="left"><b>Item Name</b></td>
-	// 				<td align="left"><b>Quantity</b></td>
-    //             </tr>';
-	
-	// $prev = "";
-	// while ($row = mysqli_fetch_assoc($r)){
-
-	// 	$isSame = $prev === $row['SalesOrderId'];
-		
-	// 	$salesOrderId = $isSame ? "" : $row['SalesOrderId'];
-	// 	$customerName = $isSame ? "" : $row['CustomerName'];
-	// 	$contactNumber = $isSame ? "" : $row['ContactNumber'];
-	// 	$dateCreated = $isSame ? "" : $row['DateCreated'];
-	// 	$createdBy = $isSame ? "" : $row['CreatedBy'];
-
-	// 	echo '<tr>
-	// 		<td align="left">' .$salesOrderId. '</td>
-	// 		<td align="left">' .$customerName.'</td>
-	// 		<td align="left">' .$contactNumber. '</td>
-	// 		<td align="left">' .$dateCreated. '</td>
-	// 		<td align="left">' .$createdBy. '</td>
-	// 		<td align="left">' . $row['ItemId'] . '</td>
-	// 		<td align="left">' . $row['ItemName'] . '</td>
-	// 		<td align="left">' . $row['Quantity'] . '</td>
-	// 	</tr>';
-
-	// 	$prev = $salesOrderId;
-	// }
-	// } 
-	// echo '</table>';
-
-	// mysqli_free_result($r); // Free up the resources.
-	// mysqli_close($dbc); // Close the database connection.
 
 ?>

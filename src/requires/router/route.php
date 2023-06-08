@@ -113,6 +113,7 @@ Route::add('/createOrder', $module3.'createOrder');
 Route::add('/agentPerformance', $module4.'agentPerformance');
 Route::add('/salesPerformance', $module4.'salesPerformance');
 Route::add('/recordOrder', $module4.'recordOrder');
+Route::add('/receiptOrder', $module4.'receiptOrder');
 
 require "authenticator.php";
 ?>

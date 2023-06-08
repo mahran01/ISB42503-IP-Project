@@ -21,6 +21,7 @@
 				<li><a href="/agentPerformance" class="router-link">Agent Performance</a></li>
 				<li><a href="/salesPerformance" class="router-link">Sales Performance</a></li>
 				<li><a href="/recordOrder" class="router-link">Record Order</a></li>
+				<li><a href="/receiptOrder" class="router-link">Receipt Order</a></li>
 				<li><a href="/logout" class="router-link">Logout</a></li>
 			</ul>
 		</div>
