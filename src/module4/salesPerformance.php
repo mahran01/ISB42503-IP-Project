@@ -13,7 +13,7 @@
         <?php
             while ($row = $resultSet->fetch_assoc()) {
                 $month = $row["month"];
-                echo "<option value='$month'>The <font color='blue'>$month</font> Month</option>";
+                echo "<option value='$month'>The Month <font color='blue'>$month</font></option>";
             }
         ?>
         </select>
@@ -37,6 +37,7 @@
 			$result = mysqli_query($dbc, $query);
 			$monthSales = mysqli_fetch_assoc($result);
 			
+			echo "<br/><b>Month:</b> $month <br/>";
 			echo '<br/><table  border="3" align="center" cellspacing="2" cellpadding="15">
 					<tr>
 					<td align="center"><b>Total Sales by Month (RM)</b></td>
