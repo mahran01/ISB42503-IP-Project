@@ -37,7 +37,7 @@
 			$result = mysqli_query($dbc, $query);
 			$monthSales = mysqli_fetch_assoc($result);
 			
-			echo '<table  border="3" align="center" cellspacing="2" cellpadding="15">
+			echo '<br/><table  border="3" align="center" cellspacing="2" cellpadding="15">
 					<tr>
 					<td align="center"><b>Total Sales by Month (RM)</b></td>
 					</tr>

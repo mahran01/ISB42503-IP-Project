@@ -16,7 +16,6 @@
 					<td align="left"><b>Contact Number</b></td>
 					<td align="left"><b>Date Create</b></td>
 					<td align="left"><b>Created By</b></td>
-					<td align="left"><b>Approval ID</b></td>
 					<td align="left"><b>Item ID</b></td>
 					<td align="left"><b>Quantity</b></td>
                 </tr>';
@@ -32,7 +31,6 @@
 		$contactNumber = $isSame ? "" : $row['ContactNumber'];
 		$dateCreated = $isSame ? "" : $row['DateCreated'];
 		$createdBy = $isSame ? "" : $row['CreatedBy'];
-		$approvalId = $isSame ? "" : $row['ApprovalId'];
 
 		echo '<tr>
 			<td align="left">' .$salesOrderId. '</td>
@@ -41,7 +39,6 @@
 			<td align="left">' .$contactNumber. '</td>
 			<td align="left">' .$dateCreated. '</td>
 			<td align="left">' .$createdBy. '</td>
-			<td align="left">' .$approvalId. '</td>
 			<td align="left">' . $row['ItemId'] . '</td>
 			<td align="left">' . $row['Quantity'] . '</td>
 		</tr>';
