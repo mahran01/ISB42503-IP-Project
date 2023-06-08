@@ -22,7 +22,33 @@
 	<p><input type="submit" name="submit" value="Check" /></p>
 	<input type="hidden" name="submitted" value="TRUE" />
 </form>
+<style>
+.custom-table {
+    width: 100%;
+    max-width: 1500px; 
+    border-collapse: collapse;
+    border: 1px solid #ccc;
+}
 
+.custom-table th,
+.custom-table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+}
+
+.custom-table th {
+    background-color: #f2f2f2;
+}
+
+.custom-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.custom-table tr:hover {
+    background-color: #eaeaea;
+}
+</style>
 <?php
 
 if (isset($_POST['submitted'])) {
