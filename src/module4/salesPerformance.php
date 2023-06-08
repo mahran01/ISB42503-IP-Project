@@ -1,8 +1,35 @@
 <?php
 	$page_title = "Sales Performance";
 	[$mysqli, $dbc] = Route::MYSQL_BOTH();
+    $supplierId = Authenticator::Supplier();
 ?>
+<style>
+.custom-table {
+    width: 100%;
+    max-width: 1500px; 
+    border-collapse: collapse;
+    border: 1px solid #ccc;
+}
 
+.custom-table th,
+.custom-table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+}
+
+.custom-table th {
+    background-color: #f2f2f2;
+}
+
+.custom-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.custom-table tr:hover {
+    background-color: #eaeaea;
+}
+</style>
 <h2>Sales Performance by Month</h2>
 <form action="" method="post">
 	<p>Monthly Sales: 
@@ -13,7 +40,7 @@
         <?php
             while ($row = $resultSet->fetch_assoc()) {
                 $month = $row["month"];
-                echo "<option value='$month'>The <font color='blue'>$month</font> Month</option>";
+                echo "<option value='$month'>The Month <font color='blue'>$month</font></option>";
             }
         ?>
         </select>
@@ -37,7 +64,8 @@
 			$result = mysqli_query($dbc, $query);
 			$monthSales = mysqli_fetch_assoc($result);
 			
-			echo '<br/><table  border="3" align="center" cellspacing="2" cellpadding="15">
+			echo "<br/><b>Month:</b> $month <br/>";
+			echo '<br/><table  border="3" align="center" cellspacing="2" cellpadding="15" class="custom-table">
 					<tr>
 					<td align="center"><b>Total Sales by Month (RM)</b></td>
 					</tr>

@@ -32,13 +32,13 @@ VALUES
 
 INSERT INTO item (ItemId, ItemName, ItemDescription, ItemPrice, ItemQuantity, SupplierId)
 VALUES
-(1001, 'Item A', '', 1.5, 100, 2001),
-(1002, 'Item B', '', 2.5, 50, 2001),
-(1003, 'Item C', '', 1.5, 90, 2001),
-(1004, 'Item D', '', 3.5, 20, 2001),
-(1005, 'Item E', '', 1.5, 10, 2002),
-(1006, 'Item F', '', 4.0, 999, 2002),
-(1007, 'Item G', '', 1.5, 0, 2003);
+(1001, 'Pencil', '2b Stabilo', 1.5, 100, 2001),
+(1002, 'Pen', 'Pilot', 2.5, 50, 2001),
+(1003, 'Rubber', 'Stabilo', 1.5, 90, 2001),
+(1004, 'Highlighter', 'Skyler', 3.5, 20, 2001),
+(1005, 'Ruler', '15 Centimeter', 1.5, 10, 2002),
+(1006, 'Colour Pencil', 'Swan', 4.0, 999, 2002),
+(1007, 'Sharpener', 'Stabilo', 1.5, 0, 2003);
 
 INSERT INTO approval (ApprovalId, ApprovalStatusId, ApprovedBy)
 VALUES

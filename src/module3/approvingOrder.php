@@ -83,10 +83,37 @@ if (postExists('updateApprovalSubmit'))
     }
 }
 ?>
+<style>
+.custom-table {
+    width: 100%;
+    max-width: 1500px; 
+    border-collapse: collapse;
+    border: 1px solid #ccc;
+}
+
+.custom-table th,
+.custom-table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+}
+
+.custom-table th {
+    background-color: #f2f2f2;
+}
+
+.custom-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.custom-table tr:hover {
+    background-color: #eaeaea;
+}
+</style>
 <h2>Pending approval</h2>
 <form action="" method="post" id="modifyItemForm">
     <h3>Order Data</h3>
-    <table style="width: 40vw;">
+    <table style="width: 40vw;" class="custom-table">
         <?php
         if (($rows = $mysqli->execute_query(
             'SELECT SalesOrderId OrderId, CreatedBy AgentId, UserName AgentName, so.DateCreated, ItemId, ItemName, sol.Quantity QuantityRequested, i.ItemQuantity QuantityOnHand, ApprovalStatusName

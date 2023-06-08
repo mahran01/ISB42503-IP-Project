@@ -1,9 +1,36 @@
 <?php
 	$page_title = "Agent Performance";
 	[$mysqli, $dbc] = Route::MYSQL_BOTH();
+    $supplierId = Authenticator::Supplier();
 ?>
 
+<style>
+.custom-table {
+    width: 100%;
+    max-width: 1500px; 
+    border-collapse: collapse;
+    border: 1px solid #ccc;
+}
 
+.custom-table th,
+.custom-table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+}
+
+.custom-table th {
+    background-color: #f2f2f2;
+}
+
+.custom-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.custom-table tr:hover {
+    background-color: #eaeaea;
+}
+</style>
 <h2>Agent Performance</h2>
 <form action="" method="post">
 	<p>Agent: 
@@ -51,7 +78,8 @@
 		$result_sales = mysqli_fetch_array($query);
 		// echo $result_sales['total_sales'];
 
-		echo '<br/><table  border="3" align="center" cellspacing="2" cellpadding="15">
+		echo "<br/><b>Agent:</b> $agent <br/>";
+		echo '<br/><table  border="3" align="center" cellspacing="2" cellpadding="15" class="custom-table">
 				<tr>
 				<td align="center"><b>Number of Product Sold</b></td>
 				<td align="center"><b>Total Sales (RM)</b></td>

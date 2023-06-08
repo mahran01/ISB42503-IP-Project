@@ -5,14 +5,8 @@ $dbc = Route::MYSQL_PROCEDURAL();
 $page_title = 'Register';
 
 // $supplierid= $_COOKIE['supplierId'];
-if(isset($_COOKIE ['supplierId'])) 
-{
-    $supplierId = $_COOKIE['supplierId'];
-}
-else
-{
-    exit();
-}
+
+$supplierid = Authenticator::Supplier();
 
  // Check if the form has been submitted.
 if (isset($_POST['submitted'])) {

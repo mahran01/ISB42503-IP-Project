@@ -2,9 +2,8 @@
 $page_title = "Restocking";
 
 $mysqli = Route::MYSQL();
-//@TODO Get Supplier ID here #################################################################################################
-$supplierId = "2001";
-//Get Supplier ID ends here ##################################################################################################
+
+$supplierId = Authenticator::Supplier();
 
 ?>
 <h1>Restocking</h1>
