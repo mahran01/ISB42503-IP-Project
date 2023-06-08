@@ -16,6 +16,8 @@
 			<ul>
 				<li class="navtop"><a href="/supplierHome" class="router-link">Home</a></li>
 				<li><a href="/register" class="router-link">Register Agent</a></li>
+				<li><a href="/createItem" class="router-link">Create Item</a></li>
+				<li><a href="/viewItemDetails" class="router-link">View Item</a></li>
 				<li><a href="/restockItem" class="router-link">Restock Item</a></li>
 				<li><a href="/approveOrder" class="router-link">Approve Order</a></li>
 				<li><a href="/agentPerformance" class="router-link">Agent Performance</a></li>

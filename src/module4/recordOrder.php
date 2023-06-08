@@ -1,6 +1,7 @@
 <?php
 	$page_title = 'Record Order list';
 	$dbc = Route::MYSQL_PROCEDURAL();
+    $supplierId = Authenticator::Supplier();
 ?>
 <style>
 .custom-table {

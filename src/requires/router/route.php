@@ -18,15 +18,15 @@ class Route {
     {
         if (isset($_COOKIE['agentId']))
         {
-            include self::$__INC."agent/header.php";
+            include self::$__INC."agent/header.php.test";
             return;
         }
         if (isset(($_COOKIE['supplierId'])))
         {
-            include self::$__INC."supplier/header.php";
+            include self::$__INC."supplier/header.php.test";
             return;
         }
-        include self::$__INC."header.php";
+        include self::$__INC."header.php.test";
     }
     static function footer()
     {
@@ -99,6 +99,7 @@ Route::add('/agentHome', $module1.'agent');
 Route::add('/login', $module1.'login_li');
 Route::add('/logout', $module1.'logout_li');
 Route::add('/register', $module1.'register_li');
+Route::add('/createItem', $module1.'createItem');
 Route::add('/viewItemDetails', $module1.'view_item_details');
 Route::add('/viewOrderDetails', $module1.'view_order_details');
 

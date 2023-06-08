@@ -2,9 +2,7 @@
 $page_title = "Create order";
 
 $mysqli = Route::MYSQL();
-//@TODO Get Agent ID here #############################################################################################
-$agentId = "3001";
-//Get Agent ID ends here ##############################################################################################
+$agentId = Authenticator::Agent();
 
 ?>
 <h1>Create Order</h1>

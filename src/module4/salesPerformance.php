@@ -1,6 +1,7 @@
 <?php
 	$page_title = "Sales Performance";
 	[$mysqli, $dbc] = Route::MYSQL_BOTH();
+    $supplierId = Authenticator::Supplier();
 ?>
 <style>
 .custom-table {
