@@ -50,11 +50,11 @@ VALUES
 
 INSERT INTO sales_order (SalesOrderId, CustomerName, CustomerAddress, ContactNumber, CreatedBy, ApprovalId)
 VALUES
-(1001, 'Customer A', '', '012345678910', 3001, 1001),
-(1002, 'Customer B', '', '012345678910', 3001, 1002),
-(1003, 'Customer C', '', '012345678910', 3002, 1003),
-(1004, 'Customer D', '', '012345678910', 3002, 1004),
-(1005, 'Customer E', '', '012345678910', 3002, 1005);
+(1001, 'Nasaruddin bin ahmad', '1st Floor, Jln Kuchai Maju 8, 58200 Kuala Lumpur', '012345678910', 3001, 1001),
+(1002, 'Nazrul azni bin kalisa asri', '501 Block C5 Seksyen 10 Wangsa Maju 53300 Wilayah Persekutuan Malaysia', '012345678910', 3001, 1002),
+(1003, 'Alif ezekiyel bin md ruf', 'Lot 4 Jalan Perak Telok Panglima Garang Industrial Estate ', '012345678910', 3002, 1003),
+(1004, 'Aina intan binti kamusari', 'Jalan Zaaba 70100 Seremban', '012345678910', 3002, 1004),
+(1005, 'Nur insan mardiana binti halim', '524 Lrg Dua Belas Taman Acbe 72100 Bahau', '012345678910', 3002, 1005);
 
 INSERT INTO sales_order_line (SalesOrderId, ItemId, Quantity)
 VALUES
