@@ -2,12 +2,12 @@ USE ip_project;
 
 INSERT INTO user_account (UserId, UserName, ICNumber, RoleId)
 VALUES 
-(2001, 'Supplier 1', '011105020803', 2),
-(2002, 'Supplier 2', '020809030641', 2),
-(2003, 'Supplier 3', '010131020802', 2),
-(3001, 'Agent 1', '010131020802', 3),
-(3002, 'Agent 2', '970223090378', 3),
-(3003, 'Agent 3', '991203029023', 3);
+(2001, 'Muhammad Nazri bin Murad', '011105020803', 2),
+(2002, 'Shahrul bin Nizam', '020809030641', 2),
+(2003, 'Shahrina binti Shahrizan', '010131020802', 2),
+(3001, 'Uwais bin Abdullah', '010131020801', 3),
+(3002, 'Roziah binti Puteh', '970223090378', 3),
+(3003, 'Arif bid Mat Arif', '991203029023', 3);
 
 INSERT INTO role_supplier (SupplierId)
 VALUES
