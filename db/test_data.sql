@@ -2,12 +2,12 @@ USE ip_project;
 
 INSERT INTO user_account (UserId, UserName, ICNumber, RoleId)
 VALUES 
-(2001, 'Supplier 1', '011105020803', 2),
-(2002, 'Supplier 2', '020809030641', 2),
-(2003, 'Supplier 3', '010131020802', 2),
-(3001, 'Agent 1', '010131020802', 3),
-(3002, 'Agent 2', '970223090378', 3),
-(3003, 'Agent 3', '991203029023', 3);
+(2001, 'Muhammad Nazri bin Murad', '011105020803', 2),
+(2002, 'Shahrul bin Nizam', '020809030641', 2),
+(2003, 'Shahrina binti Shahrizan', '010131020802', 2),
+(3001, 'Uwais bin Abdullah', '010131020801', 3),
+(3002, 'Roziah binti Puteh', '970223090378', 3),
+(3003, 'Arif bid Mat Arif', '991203029023', 3);
 
 INSERT INTO role_supplier (SupplierId)
 VALUES
@@ -50,11 +50,11 @@ VALUES
 
 INSERT INTO sales_order (SalesOrderId, CustomerName, CustomerAddress, ContactNumber, CreatedBy, ApprovalId)
 VALUES
-(1001, 'Customer A', '', '012345678910', 3001, 1001),
-(1002, 'Customer B', '', '012345678910', 3001, 1002),
-(1003, 'Customer C', '', '012345678910', 3002, 1003),
-(1004, 'Customer D', '', '012345678910', 3002, 1004),
-(1005, 'Customer E', '', '012345678910', 3002, 1005);
+(1001, 'Nasaruddin bin ahmad', '1st Floor, Jln Kuchai Maju 8, 58200 Kuala Lumpur', '012345678910', 3001, 1001),
+(1002, 'Nazrul azni bin kalisa asri', '501 Block C5 Seksyen 10 Wangsa Maju 53300 Wilayah Persekutuan Malaysia', '012345678910', 3001, 1002),
+(1003, 'Alif ezekiyel bin md ruf', 'Lot 4 Jalan Perak Telok Panglima Garang Industrial Estate ', '012345678910', 3002, 1003),
+(1004, 'Aina intan binti kamusari', 'Jalan Zaaba 70100 Seremban', '012345678910', 3002, 1004),
+(1005, 'Nur insan mardiana binti halim', '524 Lrg Dua Belas Taman Acbe 72100 Bahau', '012345678910', 3002, 1005);
 
 INSERT INTO sales_order_line (SalesOrderId, ItemId, Quantity)
 VALUES
