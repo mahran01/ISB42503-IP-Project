@@ -102,6 +102,7 @@ Route::add('/register', $module1.'register_li');
 Route::add('/createItem', $module1.'createItem');
 Route::add('/viewItemDetails', $module1.'view_item_details');
 Route::add('/viewOrderDetails', $module1.'view_order_details');
+Route::add('/supplierRegister', $module1.'supplierRegister');
 
 //Module 2
 Route::add('/restockItem', $module2.'restockItem');

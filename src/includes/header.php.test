@@ -29,6 +29,7 @@
 			<ul class="nav nav-pills flex-column mb-auto">
                 <li><a class="nav-link text-white router-link" href="/home">Home</a></li>
                 <li><a class="nav-link text-white router-link" href="/login">Login</a></li>
+				<li><a class="nav-link text-white router-link" href="/supplierRegister">Supplier Register</a></li>
 			</ul>
 			<hr />
 		</div>

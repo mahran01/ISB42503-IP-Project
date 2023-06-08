@@ -61,6 +61,7 @@
 				<li><a class="nav-link text-white router-link" href="/agentPerformance">Agent Performance</a></li>
 				<li><a class="nav-link text-white router-link" href="/salesPerformance">Sales Performance</a></li>
 				<li><a class="nav-link text-white router-link" href="/recordOrder">Record Order</a></li>
+				<li><a class="nav-link text-white router-link" href="/receiptOrder">Receipt Order</a></li>
 				<li><a class="nav-link text-white router-link" href="/logout">Logout</a></li>
 			</ul>
 			<hr />
