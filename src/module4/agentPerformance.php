@@ -51,7 +51,7 @@
 		$result_sales = mysqli_fetch_array($query);
 		// echo $result_sales['total_sales'];
 
-		echo '<table  border="3" align="center" cellspacing="2" cellpadding="15">
+		echo '<br/><table  border="3" align="center" cellspacing="2" cellpadding="15">
 				<tr>
 				<td align="center"><b>Number of Product Sold</b></td>
 				<td align="center"><b>Total Sales (RM)</b></td>
