@@ -16,6 +16,8 @@
 			<ul>
                 <li class="navtop"><a href="/agentHome" class="router-link">Home</a></li>
                 <li><a href="/createOrder" class="router-link">Create Order</a></li>
+                <li><a href="/viewItemDetails" class="router-link">View Item Details</a></li>
+                <li><a href="/viewOrderDetails" class="router-link">View Order Details</a></li>
                 <li><a href="/logout" class="router-link">Logout</a></li>
 			</ul>
 		</div>

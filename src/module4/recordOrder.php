@@ -2,13 +2,14 @@
 	$page_title = 'Record Order list';
 	$dbc = Route::MYSQL_PROCEDURAL();
 ?>
+
 <h2>Record Order List</h2>
 <?php
 	$q = "SELECT * FROM sales_order INNER JOIN sales_order_line USING (SalesOrderId) INNER JOIN approval USING (ApprovalId) WHERE approval.ApprovalStatusId = 2";
 	$r = mysqli_query($dbc, $q) or die ('error');
 	$num = mysqli_num_rows($r);
         if(mysqli_num_rows($r) > 0){
-	echo '<table border="3" align="center" cellspacing="2" cellpadding="5">
+	echo '<table border="3" align="center" cellspacing="2" cellpadding="5" class="custom-table">
                 <tr>
 					<td align="left"><b>Sales Order ID</b></td>
 					<td align="left"><b>Customer Name</b></td>

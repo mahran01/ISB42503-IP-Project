@@ -111,14 +111,13 @@ if (!empty($errors)) { // Print any error messages.
 <form action="" method="post">
 	<p>LoginName: <input type="text" name="LoginName" size="20" maxlength="40" /> </p>
 	<p>LoginPassword: <input type="LoginPassword" name="LoginPassword" size="20" maxlength="20" /></p>
-	<p><input type="submit" name="submit" value="Login" /></p>
-			<label class="form-label">Select User Type:</label>
-		  <select class="form-select mb-3"
-		          name="role" 
-		          aria-label="Default select example">
-			  <option selected value="2">Supplier</option>
-			  <option value="3">Agent</option>
-			  <option value="1">Admin</option>
-			  
-		  </select>
+    <label class="form-label">Select User Type:</label>
+    <select class="form-select mb-3"
+    name="role" 
+    aria-label="Default select example">
+        <option selected value="2">Supplier</option>
+        <option value="3">Agent</option>
+        <option value="1">Admin</option>
+    </select>
+<p><input type="submit" name="submit" value="Login" /></p>
 </form>
