@@ -175,35 +175,33 @@ if (postExists("addItemSubmit"))
                         position:absolute;
                         background-color:black;
                         display:block;
-                        height:80px;
-                        width:80px;
+                        height:40px;
+                        width:40px;
                         border-radius:50%;
-                        top:calc(50% - 40px);
-                        left:calc(50% - 40px);
+                        top:calc(50% - 20px);
+                        left:calc(50% - 20px);
                     }
                     .icon-plus:after {
-                        width: 50px;
-                        height: 16px;
-                        left: 15px;
-                        top: 32px;
+                        width: 22px;
+                        height: 6px;
+                        left: 9px;
+                        top: 17px;
                     }
                     .icon-plus:before {
-                        width: 16px;
-                        height: 50px;
-                        left: 32px;
-                        top: 15px;
+                        width: 6px;
+                        height: 22px;
+                        left: 17px;
+                        top: 9px;
                     }
                     .icon-plus:after, .icon-plus:before {
                         content: '';
                         position: absolute;
                         background: #FFF;
-                        -webkit-border-radius: 5px;
-                        -moz-border-radius: 5px;
-                        border-radius: 5px;
+                        border-radius: 2px;
                     }
                 </style>
-                <fieldset id="addItemCard" style="height:125px; width:200px; min-inline-size:unset; position:relative;">
-                    <legend>Add Item</legend>
+                <fieldset class="border rounded p-2" id="addItemCard" style="background-color: whitesmoke; height:125px; width:200px; min-inline-size:unset; position:relative;">
+                    <label>Add Item</label>
                     <div class="icon-plus"></div>
                 </fieldset>
             </div>
@@ -241,7 +239,7 @@ if (postExists("addItemSubmit"))
                 var $fieldset = $('<fieldset>',{
                 'id': `itemCard-${i}`,
                 'number': i,
-                'style': 'width: 200px; min-inline-size: unset; position: relative'
+                'style': 'width: 200px; min-inline-size: unset; position: relative; '
                 });
 
                 $('<legend>', {
