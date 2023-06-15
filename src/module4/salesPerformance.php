@@ -34,7 +34,7 @@
 <form action="" method="post">
 	<p>Monthly Sales: 
     <?php
-        $resultSet = $mysqli->query("SELECT DISTINCT MONTH(sales_order.DateCreated) AS month FROM sales_order INNER JOIN sales_order_line USING (SalesOrderId) INNER JOIN approval USING (ApprovalId) WHERE approval.ApprovalStatusId = 2");
+        $resultSet = $mysqli->query("SELECT DISTINCT MONTH(sales_order.DateCreated) AS month FROM sales_order INNER JOIN sales_order_line USING (SalesOrderId) INNER JOIN approval USING (ApprovalId) WHERE approval.ApprovalStatusId = 2 AND approval.ApprovedBy = $supplierId");
     ?>
         <select name="month">
         <?php
@@ -56,11 +56,11 @@
 		$errors = array(); // Initialize error array.
 
 		if (empty($_POST['month'])) {
-			$errors[] = 'You forgot to select a month.';
+			echo "There is no sales yet!!";
 		} else {
 			$month = $_POST['month'];
 
-			$query = "SELECT SUM(Quantity * ItemPrice) AS month_sales FROM sales_order INNER JOIN sales_order_line USING (SalesOrderId) INNER JOIN approval USING (ApprovalId) INNER JOIN item USING (ItemId) WHERE approval.ApprovalStatusId = 2 AND MONTH(sales_order.DateCreated) = '$month'";
+			$query = "SELECT SUM(Quantity * ItemPrice) AS month_sales FROM sales_order INNER JOIN sales_order_line USING (SalesOrderId) INNER JOIN approval USING (ApprovalId) INNER JOIN item USING (ItemId) WHERE approval.ApprovalStatusId = 2 AND MONTH(sales_order.DateCreated) = '$month' AND approval.ApprovedBy = $supplierId";
 			$result = mysqli_query($dbc, $query);
 			$monthSales = mysqli_fetch_assoc($result);
 			

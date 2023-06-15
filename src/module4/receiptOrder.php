@@ -1,12 +1,13 @@
 <?php
 	$page_title = 'Reciept Order';
 	[$mysqli, $dbc] = Route::MYSQL_BOTH();
+    $supplierId = Authenticator::Supplier();
 ?>
 <h2>Reciept Order</h2>
 <form action="" method="post">
 	<p>Sales Order Id: 
 	<?php
-		$resultSet= $mysqli->query("SELECT DISTINCT SalesOrderId FROM sales_order INNER JOIN sales_order_line USING (SalesOrderId) INNER JOIN approval USING (ApprovalId) INNER JOIN item USING (ItemId) WHERE approval.ApprovalStatusId = 2");
+		$resultSet= $mysqli->query("SELECT DISTINCT SalesOrderId FROM sales_order INNER JOIN sales_order_line USING (SalesOrderId) INNER JOIN approval USING (ApprovalId) INNER JOIN item USING (ItemId) WHERE approval.ApprovalStatusId = 2 AND approval.ApprovedBy = $supplierId");
 	?>
 		<select name ="salesOrderId">
 		<!-- <option value="" >Select Sales Order Id</option> -->
@@ -22,33 +23,7 @@
 	<p><input type="submit" name="submit" value="Check" /></p>
 	<input type="hidden" name="submitted" value="TRUE" />
 </form>
-<style>
-.custom-table {
-    width: 100%;
-    max-width: 1500px; 
-    border-collapse: collapse;
-    border: 1px solid #ccc;
-}
 
-.custom-table th,
-.custom-table td {
-    padding: 8px;
-    text-align: left;
-    border-bottom: 1px solid #ccc;
-}
-
-.custom-table th {
-    background-color: #f2f2f2;
-}
-
-.custom-table tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-.custom-table tr:hover {
-    background-color: #eaeaea;
-}
-</style>
 <?php
 
 if (isset($_POST['submitted'])) {
@@ -64,12 +39,11 @@ if (isset($_POST['submitted'])) {
     $errors = array(); // Initialize error array.
 
     if (empty($_POST['salesOrderId'])) {
-        $errors[] = 'You forgot to select salesOrderId.';
+        echo "There is no sales order yet!!";
     } else {
         $salesOrderId = ($_POST['salesOrderId']);
-    }
-     
-    $q = "SELECT * FROM sales_order INNER JOIN sales_order_line USING (SalesOrderId) INNER JOIN approval USING (ApprovalId) INNER JOIN item USING (ItemId) WHERE approval.ApprovalStatusId = 2 AND sales_order.SalesOrderId = $salesOrderId";
+
+    $q = "SELECT * FROM sales_order INNER JOIN sales_order_line USING (SalesOrderId) INNER JOIN approval USING (ApprovalId) INNER JOIN item USING (ItemId) WHERE approval.ApprovalStatusId = 2 AND sales_order.SalesOrderId = $salesOrderId AND approval.ApprovedBy = $supplierId";
     $r = mysqli_query($dbc, $q) or die ('error');
 	$num = mysqli_num_rows($r);
 
@@ -108,6 +82,7 @@ if (isset($_POST['submitted'])) {
     echo '<br/>--------------------------------';
 	echo '<br/><b>TOTAL PRICE:</b> RM'. $total_price['total_price'];
     echo '<br/>--------------------------------';
+    }
 }
 
 ?>

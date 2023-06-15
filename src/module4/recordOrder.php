@@ -32,47 +32,49 @@
 </style>
 <h2>Record Order List</h2>
 <?php
-	$q = "SELECT * FROM sales_order INNER JOIN sales_order_line USING (SalesOrderId) INNER JOIN approval USING (ApprovalId) INNER JOIN item USING (ItemId) WHERE approval.ApprovalStatusId = 2";
+	$q = "SELECT * FROM sales_order INNER JOIN sales_order_line USING (SalesOrderId) INNER JOIN approval USING (ApprovalId) INNER JOIN item USING (ItemId) WHERE approval.ApprovalStatusId = 2 AND approval.ApprovedBy = $supplierId";
 	$r = mysqli_query($dbc, $q) or die ('error');
 	$num = mysqli_num_rows($r);
-        if(mysqli_num_rows($r) > 0){
-	echo '<table border="3" align="center" cellspacing="2" cellpadding="5" class="custom-table">
-                <tr>
-					<td align="left"><b>Sales Order ID</b></td>
-					<td align="left"><b>Customer Name</b></td>
-					<td align="left"><b>Contact Number</b></td>
-					<td align="left"><b>Date Create</b></td>
-					<td align="left"><b>Created By</b></td>
-					<td align="left"><b>Item ID</b></td>
-					<td align="left"><b>Item Name</b></td>
-					<td align="left"><b>Quantity</b></td>
-                </tr>';
-	
-	$prev = "";
-	while ($row = mysqli_fetch_assoc($r)){
-
-		$isSame = $prev === $row['SalesOrderId'];
+    if(mysqli_num_rows($r) > 0){
+		echo '<table border="3" align="center" cellspacing="2" cellpadding="5" class="custom-table">
+					<tr>
+						<td align="left"><b>Sales Order ID</b></td>
+						<td align="left"><b>Customer Name</b></td>
+						<td align="left"><b>Contact Number</b></td>
+						<td align="left"><b>Date Create</b></td>
+						<td align="left"><b>Created By</b></td>
+						<td align="left"><b>Item ID</b></td>
+						<td align="left"><b>Item Name</b></td>
+						<td align="left"><b>Quantity</b></td>
+					</tr>';
 		
-		$salesOrderId = $isSame ? "" : $row['SalesOrderId'];
-		$customerName = $isSame ? "" : $row['CustomerName'];
-		$contactNumber = $isSame ? "" : $row['ContactNumber'];
-		$dateCreated = $isSame ? "" : $row['DateCreated'];
-		$createdBy = $isSame ? "" : $row['CreatedBy'];
+		$prev = "";
+		while ($row = mysqli_fetch_assoc($r)){
 
-		echo '<tr>
-			<td align="left">' .$salesOrderId. '</td>
-			<td align="left">' .$customerName.'</td>
-			<td align="left">' .$contactNumber. '</td>
-			<td align="left">' .$dateCreated. '</td>
-			<td align="left">' .$createdBy. '</td>
-			<td align="left">' . $row['ItemId'] . '</td>
-			<td align="left">' . $row['ItemName'] . '</td>
-			<td align="left">' . $row['Quantity'] . '</td>
-		</tr>';
+			$isSame = $prev === $row['SalesOrderId'];
+			
+			$salesOrderId = $isSame ? "" : $row['SalesOrderId'];
+			$customerName = $isSame ? "" : $row['CustomerName'];
+			$contactNumber = $isSame ? "" : $row['ContactNumber'];
+			$dateCreated = $isSame ? "" : $row['DateCreated'];
+			$createdBy = $isSame ? "" : $row['CreatedBy'];
 
-		$prev = $salesOrderId;
+			echo '<tr>
+				<td align="left">' .$salesOrderId. '</td>
+				<td align="left">' .$customerName.'</td>
+				<td align="left">' .$contactNumber. '</td>
+				<td align="left">' .$dateCreated. '</td>
+				<td align="left">' .$createdBy. '</td>
+				<td align="left">' . $row['ItemId'] . '</td>
+				<td align="left">' . $row['ItemName'] . '</td>
+				<td align="left">' . $row['Quantity'] . '</td>
+			</tr>';
+
+			$prev = $salesOrderId;
+		}
+	}else{
+		echo "<br/>There is no sales record yet!!";
 	}
-	} 
 	echo '</table>';
 
 	mysqli_free_result($r); // Free up the resources.
